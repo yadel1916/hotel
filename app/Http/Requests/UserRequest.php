@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\models\user;
+use App\models\User;
 
 class UserRequest extends FormRequest
 {

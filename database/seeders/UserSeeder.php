@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         $user->document = '123456788';
         $user->address = 'Cll 23 #24a';
         $user->phone = '234563456';
-        $user->photo = '../img/usuario.jpg';
+        $user->photo = '11111';
         $user->email = 'anibalcas@autonoma.com';
         $user->password = bcrypt('nasa');
         $user->role = 'Admin';

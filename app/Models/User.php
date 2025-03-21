@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'id',
         'name',
         'lastname',
         'document',
@@ -63,8 +64,5 @@ class User extends Authenticatable
         }
     }
 
-    public function getPhotoAttribute($value)
-    {
-        return $value ? asset('storage/'. $value) :asset('img/usuario.jpg');
-    }
+   
 }

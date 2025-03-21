@@ -62,15 +62,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="formEdit" action="{{ url('rooms/'.$room->id) }}" class="room">
+                    <form method="POST" id="formEdit" action="{{ route('rooms.update', $room->id) }}" class="room" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
                             <input name="id" type="text" class="form-control form-control-room" hidden>
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 
-                                <input name="number_roomEdit" type="text" class="form-control form-control-room"
-                                    id="exampleNumberRoom" placeholder="Numero_habitación">
+                                <input name="number_roomEdit" type="number" class="form-control form-control-room"
+                                    id="exampleNumberEdit" placeholder="Numero_habitación">
                                 
                             </div>
                             <div class="col-sm-6">
@@ -115,7 +115,7 @@
                                 <span class="text">Cancelar</span>
 
                             </button>
-                            <button type="submit" name="id" class="btn btnfour btn-icon-split">
+                            <button type="submit" name="id" class="btn btnfour btn-icon-split" data-bs-dismiss="modal">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-check"></i>
                                 </span>
@@ -135,12 +135,16 @@
         //jquery para el modal de editar
         $(document).on('click', '.edit', function() {
             var roomId = $(this).attr('id');
+            $('button[name="id"]').val(roomId);
 
             $.get('rooms/' + roomId + '/edit', {}, function(data) {
                 var room = data.room
                 $('input[name="id"]').val(roomId);
                 $('input[name="number_roomEdit"]').val(room.number_room);
                 $('input[name="user_nameEdit"]').val(room.user_name);
+
+                console.log(room) 
+
             })
         })
 
@@ -152,11 +156,11 @@
 
             $.ajax({
                 url: url,
-                type: 'PUT',
+                type: 'POST',
                 data: form.serialize()
             }).always(function(response) {
                 console.log("Edicion  exitosa", response);
-                $('editExample').modal('hide');
+                $('#editExample').modal('hide');
                 location.reload();
             });
         });

@@ -2,7 +2,7 @@
 @section('titleModule', 'Modelo Usuario')
 
 @section('head')
-<link href="{{asset("css/sb-admin-2.min.css")}}" rel="stylesheet">
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -10,7 +10,8 @@
     <div class="insert">
         @foreach ($users as $user)
             <div class="card card-hover" style="width: 18rem; display: inline-block; margin: 10px;">
-                <img src="{{ $user->photo }}" class="card-img-top" alt="Foto de {{ $user->name }}">
+                <img class="foto rounded-circle mt-4 mx-auto my-auto d-block"
+                    src="{{ asset('profile_images/' . $user->photo) }}" alt="..." style="width:85%" height="260">
                 <div class="card-body">
                     <h5 class="card-title">{{ $user->name }} {{ $user->lastname }}</h5>
                     <p class="card-text">
@@ -272,6 +273,17 @@
                 }
             )
         })
+
+        // Jquery para cambiar la imagen
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.style.display = "block";
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
     </script>
 
 

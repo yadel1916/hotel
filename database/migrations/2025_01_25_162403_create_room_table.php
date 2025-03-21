@@ -26,5 +26,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('rooms');
+        Schema::table('rooms', function (Blueprint $table) {
+            $table->unsignedBigInteger('room_id')->nullable(false)->change(); // Revertir el cambio si es necesario
+        });
     }
 };

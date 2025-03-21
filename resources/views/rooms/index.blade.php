@@ -8,8 +8,8 @@
             <div class="card card-hover" style="width: 18rem; display: inline-block; margin: 10px;">
                 <div class="card-body">
                     <p class="card-text">
-                        <strong>number_room:</strong> {{ $room->number_room }} <br>
-                        <strong>user_name:</strong> {{ $room->user_name }} <br>
+                        <strong>Numero_habitación:</strong> {{ $room->number_room }} <br>
+                        <strong>Nombre_usuario:</strong> {{ $room->user_name }} <br>
 
                         <button type="button" class="btn  btn-user btn-block edit" data-bs-toggle="modal"
                             data-bs-target="#editExample" id='{{ $room->id }}'>Editar </button>
@@ -53,6 +53,7 @@
         </div>
     </div>
 
+    
     {{-- MOdal editar --}}
     <div class="modal fade" id="editExample" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -62,7 +63,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="formEdit" action="{{ route('rooms.update', $room->id) }}" class="room" enctype="multipart/form-data">
+                    <form method="POST" id="formEdit" action="{{ url('rooms/' . $room->id) }}" class="room" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
@@ -89,7 +90,8 @@
 
             </div>
         </div>
-    </div>
+    </div> 
+    
 
     {{-- MOdal delete --}}
     <div class="modal fade" id="exampleDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -100,7 +102,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="formdelete" action="{{ url('rooms/' . $room->id) }}" class="user">
+                    <form method="POST" id="formdelete" action="{{ url('rooms/'. $room->id) }}" class="room">
                         @csrf
                         @method('DELETE')
                         <div class="form-group row">
@@ -115,7 +117,7 @@
                                 <span class="text">Cancelar</span>
 
                             </button>
-                            <button type="submit" name="id" class="btn btnfour btn-icon-split" data-bs-dismiss="modal">
+                            <button type="submit" name="id" class="btn btnfour btn-icon-split">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-check"></i>
                                 </span>
@@ -156,7 +158,7 @@
 
             $.ajax({
                 url: url,
-                type: 'POST',
+                type: 'PUT',
                 data: form.serialize()
             }).always(function(response) {
                 console.log("Edicion  exitosa", response);
@@ -185,7 +187,7 @@
 
             }).always(function(response) {
                 console.log("Eliminación exitosa", response);
-                $('exampledelete').modal('hide');
+                $('#exampleDelete').modal('hide');
                 location.reload();
             });
         });

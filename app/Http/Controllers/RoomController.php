@@ -63,11 +63,11 @@ class RoomController extends Controller
      */
     public function update(RoomRequest $request, Room $room)
     {
-        $room->name = $request -> number_room;
-        $room->name = $request -> user_name;
+        $room->number_room = $request -> number_roomEdit;
+        $room->user_name = $request -> user_nameEdit;
         
         if ($room->save()){
-            return redirect ('rooms')->with('messages', 'La habitación;'. $room->number_room.' ¡fue reservada por!');
+            return redirect ('rooms')->with('messages', 'La habitación:'. $room->number_room.' ¡fue reservada por!');
         }
     }
 
@@ -76,7 +76,7 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        if($user->delete()){
+        if($room->delete()){
             return redirect('rooms')->with('messages', 'La habitación:'.$user->number_room.' ¡Esta disponible!');
         }
     }

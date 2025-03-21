@@ -70,26 +70,17 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-        // Guardar imagen si el usuario sube una nueva
-        if ($request->hasFile('profile_image')) {
-            // Eliminar imagen anterior si existe
-            $oldImagePath = public_path('profile_images/' . $user->photo);
-            if ($user->photo && file_exists($oldImagePath)) {
-                unlink($oldImagePath);
-            }
-        
-            // Guardar nueva imagen en public/profile_images/
-            $imageName = time() . '.' . $request->profile_image->getClientOriginalExtension();
-            $request->profile_image->move(public_path('profile_images'), $imageName);
-            
-            // Guardar el nombre de la imagen en la base de datos
-            $user->photo = $imageName;
-        }else {
-            // Si no se subió una nueva imagen, asignar imagen por defecto
-            if (empty($user->photo)) {
-                $user->photo = 'img/usuario.jpg'; // Nombre de la imagen por defecto
-            }
+       
+        // Si el usuario no tiene una imagen, asignar la imagen por defecto
+        if (empty($user->photo)) {
+            $user->photo = '../img/usuario.jpg'; // Ruta de la imagen por defecto
         }
+
+    
+
+    // Guardar el nombre de la imagen en la base de datos
+        $user->photo = $imageName;
+        
         $user->name = $request -> nameEdit;
         $user->lastname = $request -> lastnameEdit;
         $user->document = $request -> documentEdit;

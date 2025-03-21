@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 
-class Reserva extends Model
+class booking extends Model
 {
         /** @use HasFactory<\Database\Factories\UserFactory> */
         use HasFactory, Notifiable;
@@ -17,9 +17,10 @@ class Reserva extends Model
          * @var list<string>
          */
         protected $fillable = [
-           
-           'appoiment',
-           'description'
+           'id',
+           'description',
+           'user_id',
+           'room_id'
         ];
 
         public function room(){

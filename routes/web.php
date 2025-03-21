@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\BookingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,9 +25,15 @@ Route::middleware('auth')->group(function () {
     Route::resources([
         'rooms' => RoomController::class
     ]);
+
+    Route::resources([
+        'bookings' => BookingController::class
+    ]);
+
 });
 
 Route::post('users/search',[UserController::class,'search']);
 Route::post('rooms/search',[RoomController::class,'search']);
+Route::post('bookings/search',[BookingController::class,'search']);
 
 require __DIR__.'/auth.php';

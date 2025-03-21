@@ -81,7 +81,7 @@
             </li>
 
 
-             <!-- Nav Item Mascotas - Pages Collapse Menu -->
+            <!-- Nav Item Habitaciones - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                     aria-expanded="true" aria-controls="collapseThree">

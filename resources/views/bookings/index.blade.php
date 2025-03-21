@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titleModule', 'Modelo Usuario')
+@section('titleModule', 'Modelo Reserva')
 
 @section('head')
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -8,22 +8,18 @@
 @section('content')
 
     <div class="insert">
-        @foreach ($users as $user)
+        @foreach ($bookings as $booking)
             <div class="card card-hover" style="width: 18rem; display: inline-block; margin: 10px;">
-                <img class="foto rounded-circle mt-4 mx-auto my-auto d-block"
-                    src="{{ asset('profile_images/' . $user->photo) }}" alt="..." style="width:85%" height="260">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $user->name }} {{ $user->lastname }}</h5>
+                    
                     <p class="card-text">
-                        <strong>Documento:</strong> {{ $user->document }} <br>
-                        <strong>Dirección:</strong> {{ $user->address }} <br>
-                        <strong>Teléfono:</strong> {{ $user->phone }} <br>
-                        <strong>Email:</strong> {{ $user->email }} <br>
-                        <strong>Rol:</strong> {{ $user->role }} <br>
+                        <strong>Id:</strong> {{ $booking->id }} <br>
+                        <strong>Descripción:</strong> {{ $booking->description }} <br>
+                       
                         <button type="button" class="btn btn-block edit" data-bs-toggle="modal"
-                            data-bs-target="#exampleEdit" id='{{ $user->id }}'>Editar </button>
+                            data-bs-target="#exampleEdit" id='{{ $booking->id }}'>Editar </button>
                         <button data-bs-toggle="modal" data-bs-target="#exampleDelete"
-                            class="btn  btn-user btn-block delete" id='{{ $user->id }}'>Eliminar </button>
+                            class="btn  btn-user btn-block delete" id='{{ $booking->id }}'>Eliminar </button>
                     </p>
                 </div>
             </div>
@@ -35,11 +31,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Crear usuario</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">crear</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('users.store') }}" class="user">
+                    <form method="POST" action="{{ route('bookings.store') }}" class="user">
                         @csrf
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
@@ -105,7 +101,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="formEdit" action="{{ url('users/' . $user->id) }}" class="user">
+                    <form method="POST" id="formEdit" action="{{ url('bookings/' . $booking->id) }}" class="user">
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
@@ -166,7 +162,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="formdelete" action="{{ url('users/' . $user->id) }}" class="user">
+                    <form method="POST" id="formdelete" action="{{ url('bookings/' . $booking->id) }}" class="user">
                         @csrf
                         @method('DELETE')
                         <div class="form-group row">
@@ -200,28 +196,23 @@
     <script>
         //jquery para el modal de editar
         $(document).on('click', '.edit', function() {
-            var userId = $(this).attr('id');
+            var bookingId = $(this).attr('id');
 
-            $.get('users/' + userId + '/edit', {}, function(data) {
-                var user = data.user
-                $('input[name="id"]').val(userId);
-                $('input[name="nameEdit"]').val(user.name);
-                $('input[name="lastnameEdit"]').val(user.lastname);
-                $('input[name="documentEdit"]').val(user.document);
-                $('input[name="addressEdit"]').val(user.address);
-                $('input[name="phoneEdit"]').val(user.phone);
-                $('input[name="emailEdit"]').val(user.email);
-                $('select[name="roleEdit"]').val(user.role);
-
-                console.log(user)
+            $.get('bookings/' + bookingId + '/edit', {}, function(data) {
+                var booking = data.booking
+                $('input[name="id"]').val(bookingId);
+                $('input[name="descriptionEdit"]').val(booking.description);
+               
+                
+                console.log(booking)
             })
         })
 
         $('#formEdit').submit(function(e) {
             e.preventDefault();
             var form = $(this);
-            var userId = form.find('input[name="id"]').val();
-            var url = "/users/" + userId;
+            var bookingId = form.find('input[name="id"]').val();
+            var url = "/bookings/" + bookingId;
 
             $.ajax({
                 url: url,
@@ -236,15 +227,15 @@
 
         //jquery para el modal de eliminar
         $(document).on('click', '.delete', function() {
-            var userId = $(this).attr('id');
-            $('button[name="id"]').val(userId);
+            var bookingId = $(this).attr('id');
+            $('button[name="id"]').val(bookingId);
         })
 
         $('#formdelete').submit(function(e) {
             e.preventDefault();
             var form = $(this);
-            var userId = form.find('button[name="id"]').val();
-            var url = "/users/" + userId;
+            var bookingId = form.find('button[name="id"]').val();
+            var url = "/bookings/" + bookingId;
 
             $.ajax({
                 url: url,
@@ -265,7 +256,7 @@
             $query = $(this).val();
             $token = $('input[name=_token]').val();
 
-            $.post('users/search', {
+            $.post('bookings/search', {
                     q: $query,
                     _token: $token
                 },

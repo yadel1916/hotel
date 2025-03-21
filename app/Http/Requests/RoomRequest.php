@@ -24,16 +24,19 @@ class RoomRequest extends FormRequest
         
         if($this->method() == "PUT"){
             return [
-                'number_room'     => ['required', 'string', 'max:255'],
-                'user_name'       => ['required', 'string', 'max:255'],
+                'number_roomEdit'     => ['required', 'integer', 'max:255'],
+                'user_nameEdit'       => ['required', 'string', 'max:255'],
                
                 ];
             
         }
         return [
-            'number_room'     => ['required', 'string', 'max:255'],
+            'number_room'     => ['required', 'integer', 'max:255'],
             'user_name'       => ['required', 'string', 'max:255'],
             ];
+
+        
+        
         
     }
 }

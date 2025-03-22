@@ -11,13 +11,33 @@
         @foreach ($bookings as $booking)
             <div class="card card-hover" style="width: 18rem; display: inline-block; margin: 10px;">
                 <div class="card-body">
-                    
+
                     <p class="card-text">
-                        <strong>Id:</strong> {{ $booking->id }} <br>
+
                         <strong>Descripción:</strong> {{ $booking->description }} <br>
-                       
-                        <button type="button" class="btn btn-block edit" data-bs-toggle="modal"
-                            data-bs-target="#exampleEdit" id='{{ $booking->id }}'>Editar </button>
+                        <strong>Usuario:</strong> {{ $booking->user_id }} <br>
+                        <strong>Habitación:</strong> {{ $booking->room_id }} <br>
+                        <strong>Id:</strong> {{ is_object($booking->user) ? $booking->user->id : 'Id no encontrado' }} <br>
+                        <strong>Nombre:</strong> {{ is_object($booking->user) ? $booking->user->name : 'Usuario no encontrado' }}<br>
+                        <strong>Apellido:</strong>{{ is_object($booking->user) ? $booking->user->lastname : 'Usuario no encontrado' }} <br>
+                        <strong>Documento:</strong>
+                        {{ is_object($booking->user) ? $booking->user->document : 'Usuario no encontrado' }} <br>
+                        <strong>Dirección:</strong>
+                        {{ is_object($booking->user) ? $booking->user->address : 'Usuario no encontrado' }} <br>
+                        <strong>Teléfono:</strong>
+                        {{ is_object($booking->user) ? $booking->user->phone : 'Usuario no encontrado' }} <br>
+                        <strong>Corréo:</strong>
+                        {{ is_object($booking->user) ? $booking->user->email : 'Usuario no encontrado' }} <br>
+                        <strong>Rol:</strong> {{ is_object($booking->user) ? $booking->user->role : 'Usuario no encontrado' }}<br>
+                        <strong>Id:</strong> {{ is_object($booking->room) ? $booking->room->id : 'Usuario no encontrado' }} <br>
+                        <strong>Número_habitación:</strong>
+                        {{ is_object($booking->room) ? $booking->room->number_room : 'Usuario no encontrado' }} <br>
+
+
+
+
+                        <button type="button" class="btn btn-block edit" data-bs-toggle="modal" data-bs-target="#exampleEdit"
+                            id='{{ $booking->id }}'>Editar </button>
                         <button data-bs-toggle="modal" data-bs-target="#exampleDelete"
                             class="btn  btn-user btn-block delete" id='{{ $booking->id }}'>Eliminar </button>
                     </p>
@@ -35,56 +55,47 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('bookings.store') }}" class="user">
+                    <form method="POST" action="{{ route('bookings.store') }}" class="booking">
                         @csrf
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input name="name" type="text" class="form-control form-control-user"
-                                    id="exampleFirstName" placeholder="Nombre">
-                            </div>
+                       {{--  <div class="form-group row">
                             <div class="col-sm-6">
-                                <input name="lastname" type="text" class="form-control form-control-user"
-                                    id="exampleLastName" placeholder="Apellido">
+                                <label>Seleccione el usuario:</label>
+                                <select name="user_id" class="form-control form-control.user">
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <input name="document" type="text" class="form-control form-control-user"
-                                id="exampleDocument" placeholder="Documento">
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input name="address" type="text" class="form-control form-control-user"
-                                    id="exampleInputPassword" placeholder="Dirección">
-                            </div>
-                            <div class="col-sm-6">
-                                <input name="phone" type="text" class="form-control form-control-user"
-                                    id="exampleRepeatPassword" placeholder="Telefono">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input name="email" type="email" class="form-control form-control-user"
-                                id="exampleInputEmail" placeholder="Correo Electrónico">
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input name="password" type="password" class="form-control form-control-user"
-                                    id="exampleInputPassword" placeholder="Contraseña">
-                            </div>
-                            <div class="col-sm-6">
-                                <input name="password_confirmation" type="password" class="form-control form-control-user"
-                                    id="exampleRepeatPassword" placeholder="Confirmar contraseña">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" name="role">
-                                <option value="customer">usuario</option>
-                                <option value="admin">administrador</option>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label>Seleccione la habitación:</label>
+                            <select name="room_id" class="form-control form-control-user">
+                                @foreach ($rooms as $room)
+                                    <option value="{{ $room->id }}">{{ $room->number_room }}</option>
+                                @endforeach
                             </select>
                         </div>
+                        {{-- <div class="form-group row">
+                            <div class="form-group center">
+                                <input name="description" type="text" class="form-control form-control-user"
+                                    id="exampleDescription" placeholder="Descripción">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input name="user_id" type="number" class="form-control form-control-user"
+                                    id="exampleFirstName" placeholder="Usuario">
+                            </div>
+                            <div class="col-sm-6">
+                                <input name="room_id" type="number" class="form-control form-control-user"
+                                    id="exampleLastName" placeholder="Habitación">
+                            </div>
+                        </div>
+                        
                         <div class="modal-footer">
                             <button type="button" class="btn btnthree" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btnthree">Crear</button>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
 
@@ -101,50 +112,49 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="formEdit" action="{{ url('bookings/' . $booking->id) }}" class="user">
+                    <form method="POST" id="formEdit" action="{{ url('bookings/' . $booking->id) }}" class="booking">
                         @csrf
                         @method('PUT')
-                        <div class="form-group row">
-                            <input name="id" type="text" class="form-control form-control-user" hidden>
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-
-                                <input name="nameEdit" type="text" class="form-control form-control-user"
-                                    id="exampleFirstName" placeholder="Nombre">
-                            </div>
+                       {{--   <div class="form-group row">
                             <div class="col-sm-6">
-                                <input name="lastnameEdit" type="text" class="form-control form-control-user"
-                                    id="exampleLastName" placeholder="Apellido">
+                                <label>Seleccione el usuario:</label>
+                                <select name="user_id" class="form-control form-control.user">
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <input name="documentEdit" type="text" class="form-control form-control-user"
-                                id="exampleDocument" placeholder="Documento">
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input name="addressEdit" type="text" class="form-control form-control-user"
-                                    id="exampleInputPassword" placeholder="Dirección">
-                            </div>
-                            <div class="col-sm-6">
-                                <input name="phoneEdit" type="text" class="form-control form-control-user"
-                                    id="exampleRepeatPassword" placeholder="Telefono">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input name="emailEdit" type="email" class="form-control form-control-user"
-                                id="exampleInputEmail" placeholder="Correo Electrónico">
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" name="roleEdit">
-                                <option value="Usuario">usuario</option>
-                                <option value="Administtrador">administrador</option>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label>Seleccione la habitación:</label>
+                            <select name="room_id" class="form-control form-control-user">
+                                @foreach ($rooms as $room)
+                                    <option value="{{ $room->id }}">{{ $room->number_room }}</option>
+                                @endforeach
                             </select>
                         </div>
+                        {{--  <div class="form-group row">
+                            <div class="form-group center">
+                                <input name="description" type="text" class="form-control form-control-user"
+                                    id="exampleDescription" placeholder="Descripción">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input name="user_id" type="text" class="form-control form-control-user"
+                                    id="exampleUsuarioEdit" placeholder="Usuario">
+                            </div>
+                            <div class="col-sm-6">
+                                <input name="room_id" type="text" class="form-control form-control-user"
+                                    id="exampleRoomEdit" placeholder="Habitación">
+                            </div>
+                        </div>
+
 
                         <div class="modal-footer">
                             <button type="button" class="btn btnone " data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btnone ">Editar</button>
-                        </div>
+                        </div> --}}
 
                     </form>
                 </div>
@@ -202,8 +212,8 @@
                 var booking = data.booking
                 $('input[name="id"]').val(bookingId);
                 $('input[name="descriptionEdit"]').val(booking.description);
-               
-                
+
+
                 console.log(booking)
             })
         })
@@ -266,8 +276,8 @@
             )
         })
 
-          // Jquery para cambiar la imagen
-          function previewImage(event) {
+        // Jquery para cambiar la imagen
+        function previewImage(event) {
             var reader = new FileReader();
             reader.onload = function() {
                 var output = document.getElementById('imagePreview');

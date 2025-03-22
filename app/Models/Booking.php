@@ -17,18 +17,18 @@ class booking extends Model
          * @var list<string>
          */
         protected $fillable = [
-           'id',
+           //'id',
            'description',
            'user_id',
            'room_id'
         ];
 
         public function room(){
-            return $this->hasMany('App\Models\room');
+            return $this->belongsTo(Room::class, 'room_id');//('App\Models\room');
         }
 
         public function user(){
-            return $this->hasMany('App\Models\user');
+            return $this->belongsTo(User::class, 'user_id');//('App\Models\user');
         }
 
        

@@ -80,6 +80,24 @@
                 </div>
             </li>
 
+            <!-- Nav Item Reserva - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+                    aria-expanded="true" aria-controls="collapseFive">
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                    <span>Reserva</span>
+                </a>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Herramientas:</h6>
+                        <a class="collapse-item" href="{{ route('bookings.index') }}">Listar</a>
+                        <button type="button" class="collapse-item" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal" data-bs-whatever="@mdo"> crear</button>
+
+                    </div>
+                </div>
+            </li>
+
 
             <!-- Nav Item Habitaciones - Pages Collapse Menu -->
             <li class="nav-item">
@@ -416,11 +434,11 @@
                 </div>
                 <div class="modal-body">¿Realmente desea cerrar sesión?</div>
                 <div class="modal-footer">
-                    <button class="btn btnfour" type="button" data-dismiss="modal">Cancelar</button>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="btn btnfour">Cerrar Sesión</button>
                     </form>
+                    <button class="btn btnfour2" type="button" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>

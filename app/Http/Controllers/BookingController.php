@@ -5,16 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookingRequest;
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\User;
+use App\Models\Room;
+
 
 class BookingController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $bookings = Booking::All();
-        return view('bookings.index')->with(['bookings' =>$bookings]);
+       // $bookings = Booking::All();
+       // return view('bookings.index')->with(['bookings' =>$bookings]);
+       
+       $bookings = Booking::with('user','room')->get();
+       $users = User::all();
+       $room = Room::all();
+
+       return view('bookings.index', compact('bookings','users','room'));
     }
 
     /**
@@ -31,16 +40,15 @@ class BookingController extends Controller
     public function store(BookingRequest $request)
     {
         //dd($request->all());
-        $booking= new User;
-        $booking->id = $request -> id;
-        $booking->description =$request ->description;
-        $booking->user_id= $request -> user_id;
-        $booking->room_id= $request -> room_id;
-        
-        
+        $booking = new Booking;
+        //$booking->id= $request -> id;
+        $booking->description = $request -> description;
+        $booking->user_id = $request -> user_id;
+        $booking->room_id =$request ->room_id;
+       
         
         if ($booking->save()){
-            return redirect ('bookings')->with('messages', 'La reserva'. $booking->id. ' ¡fue creada!');
+            return redirect ('bookings.index')->with('messages', 'La reserva;'. $booking->id. ' ¡fue realizada!'); // se agrego index
         }
 
        
@@ -68,13 +76,17 @@ class BookingController extends Controller
      */
     public function update(BookingRequest $request, Booking $booking)
     {
-        $booking->id = $request -> id;
-        $booking->description =$request ->description;
-        $booking->user_id= $request -> user_id;
-        $booking->room_id= $request -> room_id;
-        
+       
+
+    
+
+        $booking->id= $request -> id;
+        $booking->description = $request -> description;
+        $booking->user_id = $request -> user_id;
+        $booking->room_id =$request ->room_id;
+
         if ($booking->save()){
-            return redirect ('bookings')->with('messages', 'La reserva;'. $booking->id. ' ¡fue actualizada!');
+            return redirect ('booking')->with('messages', 'La reserva;'. $booking->id. ' ¡fue actualizada!');
         }
     }
 
@@ -84,14 +96,15 @@ class BookingController extends Controller
     public function destroy(Booking $booking)
     {
         if($booking->delete()){
-            return redirect('bookings')->with('messages', 'La reserva:'.$booking->id.' ¡Fue eliminada!');
+            return redirect('bookings')->with('messages', 'La reserva:'.$booking->id.' ¡Fue eliminado!');
         }
-        return redirect('users')->with('error', 'No se pudo eliminar el usuario.');
+        
     }
 
     public function search(Request $request)
     {
-        $bookings= User::names($request->q)->paginate(20);
+        $bookings= Booking::names($request->q)->paginate(20);
         return view('bookings.search')->with(['bookings'=>$bookings]);
     }
+
 }

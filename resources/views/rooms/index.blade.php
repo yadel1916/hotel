@@ -8,7 +8,7 @@
             <div class="card card-hover" style="width: 18rem; display: inline-block; margin: 10px;">
                 <div class="card-body">
                     <p class="card-text">
-                        <strong>Numero_habitación:</strong> {{ $room->number_room }} <br>
+                        <strong>Número_habitación:</strong> {{ $room->number_room }} <br>
                         <strong>Nombre_usuario:</strong> {{ $room->user_name }} <br>
 
                         <button type="button" class="btn  btn-user btn-block edit" data-bs-toggle="modal"
@@ -34,7 +34,7 @@
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <input name="number_room" type="text" class="form-control form-control-user"
-                                    id="exampleNumberRoom" placeholder="Numero_habitación">
+                                    id="exampleNumberRoom" placeholder="Número_habitación">
                             </div>
                             <div class="col-sm-6">
                                 <input name="user_name" type="text" class="form-control form-control-user"
@@ -43,8 +43,8 @@
                         </div>
                        
                         <div class="modal-footer">
-                            <button type="button" class="btn btnfour" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btnfour">Reservar</button>
+                            <button type="button" class="btn btnfour2" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </form>
                 </div>
@@ -71,7 +71,7 @@
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 
                                 <input name="number_roomEdit" type="number" class="form-control form-control-room"
-                                    id="exampleNumberEdit" placeholder="Numero_habitación">
+                                    id="exampleNumberEdit" placeholder="Número_habitación">
                                 
                             </div>
                             <div class="col-sm-6">
@@ -82,8 +82,8 @@
                         </div>
                        
                         <div class="modal-footer">
-                            <button type="button" class="btn btnfour" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btnfour">Editar</button>
+                            <button type="button" class="btn btnfour2" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </form>
                 </div>
@@ -110,20 +110,13 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btnfour btn-icon-split" data-bs-dismiss="modal">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-trash"></i>
-                                </span>
-                                <span class="text">Cancelar</span>
-
-                            </button>
                             <button type="submit" name="id" class="btn btnfour btn-icon-split">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-check"></i>
-                                </span>
                                 <span class="text">Eliminar</span>
-
                             </button>
+                            <button type="button" class="btn btnfour2 btn-icon-split" data-bs-dismiss="modal">
+                               <span class="text">Cancelar</span>
+                            </button>
+                           
                         </div>
 
                     </form>

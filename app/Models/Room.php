@@ -22,9 +22,10 @@ class room extends Model
       ]; 
 
       public function scheduling(){
-         return $this->belongsTo('App\Models\Booking');
+         return $this->hasMany('App\Models\Booking');
       }
 
+      //Metodo para buscar
       public function scopeNames($rooms, $query){
          if(trim($query)){
              $rooms->where('number_room', 'LIKE', '%' .$query. '%')

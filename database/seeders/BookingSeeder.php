@@ -14,16 +14,14 @@ class BookingSeeder extends Seeder
     public function run(): void
     {
         $booking = new Booking;
-        $booking->id = "1";
+        //$booking->id= "1";
         $booking->description = "suit";
-        $booking->user_id= "1";
-        $booking->room_id= "1";
-        
-        
+        $booking->user_id = "1";
+        $booking->room_id = "1";
+       
         
         $booking->save();
-            
-        
-
+       
+       
     }
 }

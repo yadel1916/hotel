@@ -11,7 +11,7 @@
         @foreach ($users as $user)
             <div class="card card-hover" style="width: 18rem; display: inline-block; margin: 10px;">
                 <img class="foto rounded-circle mt-4 mx-auto my-auto d-block"
-                    src="{{ asset('profile_images/' . $user->photo) }}" alt="..." style="width:85%" height="260">
+                    src="{{ asset('img/' . $user->photo) }}" alt="..." style="width:85%" height="260">
                 <div class="card-body">
                     <h5 class="card-title">{{ $user->name }} {{ $user->lastname }}</h5>
                     <p class="card-text">
@@ -62,7 +62,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <input name="phone" type="text" class="form-control form-control-user"
-                                    id="exampleRepeatPassword" placeholder="Telefono">
+                                    id="exampleRepeatPassword" placeholder="Teléfono">
                             </div>
                         </div>
                         <div class="form-group">
@@ -86,8 +86,8 @@
                             </select>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btnthree" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btnthree">Crear</button>
+                            <button type="button" class="btn btnthree2" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </form>
                 </div>
@@ -131,7 +131,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <input name="phoneEdit" type="text" class="form-control form-control-user"
-                                    id="exampleRepeatPassword" placeholder="Telefono">
+                                    id="exampleRepeatPassword" placeholder="Teléfono">
                             </div>
                         </div>
                         <div class="form-group">
@@ -146,8 +146,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btnone " data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btnone ">Editar</button>
+                            <button type="button" class="btn btnone2 " data-bs-dismiss="modal">Cancelar</button>
                         </div>
 
                     </form>
@@ -174,20 +174,15 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btntwo  btn-icon-split" data-bs-dismiss="modal">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-trash"></i>
-                                </span>
+                            <button type="submit" name="id" class="btn btntwo btn-icon-split">
+                                <span class="text">Eliminar</span>
+                            </button>
+                            <button type="button" class="btn btntwo2  btn-icon-split" data-bs-dismiss="modal">
+                                
                                 <span class="text">Cancelar</span>
 
                             </button>
-                            <button type="submit" name="id" class="btn btntwo btn-icon-split">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-check"></i>
-                                </span>
-                                <span class="text">Eliminar</span>
-
-                            </button>
+                           
                         </div>
 
                     </form>

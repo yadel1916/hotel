@@ -23,22 +23,22 @@ class BookingRequest extends FormRequest
     {
         if($this->method() == "PUT"){
             return [
-                'id'            => ['required', 'string', 'max:255'],
-                'description'   => ['required', 'string', 'max:255'],
-                'room_id'   => ['required', 'string', 'max:255','exists:users,id'],
-                'user_id'   => ['required', 'string', 'max:255', 'exists:users,id'],
+               // 'id'     => ['required', 'string', 'max:255'],
+                'description' => ['required', 'string', 'max:255'],
+                'user_id' => ['required', 'int', 'max:255'],
+                'room_id'  => ['required', 'int', 'max:255'],
+               
+                
                 ];
             
         }
         return [
-                'id'            => ['required', 'string', 'max:255'],
-                'description'   => ['required', 'string', 'max:255'],
-                'user_id'   => ['required', 'string', 'max:255', 'exists:users,id'],
-                'room_id'   => ['required', 'string', 'max:255','exists:users,id'],
-                
+                //'id'     => ['required', 'string', 'max:255'],
+                'description' => ['required', 'string', 'max:255'],
+                'user_id' => ['required', 'int', 'max:255'],
+                'room_id'  => ['required', 'int', 'max:255'],
             ];
         
         
     }
-    
 }

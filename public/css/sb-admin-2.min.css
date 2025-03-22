@@ -66,26 +66,42 @@
 }
 
 .edit{
-    background: #c6e7d4;
+    background: #a0a4a2  ;
     transition: background-color 0.3s ease-in-out;
 }
 
 .delete{
-    background: #c6e7d4;
+    background: #aed9c0 ;
 }
 
 .btnone{
-    background: #58d68d; 
+    background:#a0a4a2 ; 
+}
+
+.btnone2{
+    background: #aed9c0; 
 }
 
 .btntwo{
-    background: #58d68d;   
+    background: #a0a4a2;   
+}
+
+.btntwo2{
+    background: #aed9c0;   
 }
 
 .btnthree{
-    background: #58d68d;   
+    background: #a0a4a2  ;   
+}
+
+.btnthree2{
+    background: #aed9c0 ;
 }
 
 .btnfour{
-    background: #58d68d;
+    background: #a0a4a2;
+}
+
+.btnfour2{
+    background: #aed9c0;
 }

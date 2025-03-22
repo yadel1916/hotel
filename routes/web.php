@@ -34,6 +34,6 @@ Route::middleware('auth')->group(function () {
 
 Route::post('users/search',[UserController::class,'search']);
 Route::post('rooms/search',[RoomController::class,'search']);
-Route::post('bookings/search',[BookingController::class,'search']);
+Route::post('bookings/search',[BookingController::class,'search', 'store', 'index']);
 
 require __DIR__.'/auth.php';
